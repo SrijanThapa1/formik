@@ -11,10 +11,11 @@ function App() {
   return (
     <div className="App">
     
-       <LogInFrom/>
+       {/* <LogInFrom/> */}
       <Routes>
+        <Route path='/' element={<LogInFrom/>}/>
         <Route path='/forgotPassword' element={<ForgotPassword/>}/>
-        <Route path='signup' element={<Signup/>}/>
+        <Route path='/signup' element={<Signup/>}/>
       </Routes>
     </div>
   );
