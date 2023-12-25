@@ -1,7 +1,8 @@
+import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react'
 import * as Yup from 'yup';
 import TextError from './TextError';
+import { Link } from 'react-router-dom';
 const initialValues= {
     firstName:'',
     lastName:'',
@@ -10,8 +11,8 @@ const initialValues= {
     gender:''
 }
 const validationSchema= Yup.object({
-    firstName:Yup.string().required("Required"),
-    lastName:Yup.string().required("Required"),
+    firstname:Yup.string().required("Required"),
+    lastname:Yup.string().required("Required"),
     email:Yup.string().email("invalid email froamt").required('Required'),
     password:Yup.string().required("required").min(8,"Must be at least 8 characters"),
     birthday:Yup.date().required("required"),
@@ -41,7 +42,7 @@ function Signup() {
                         (errorMsg) =>
                         <div className='error'>
                                 {errorMsg}
-                            </div>
+                        </div>
                         
                     }
                 </ErrorMessage>
@@ -60,9 +61,17 @@ function Signup() {
                 <option value="female">Female</option>
                 <option value="other">Other</option>
                 </Field>
-                <button id="signin" type='submit' disabled={Form.isValid}>SignIn</button>
+                {/* <p> people who use my service may have uploaded your contact infroamtion to garib ko facebook </p>
+                <p> By clicking Sign up, you agree to my Terms, Privacy Policy and Cookies Policy.
+                    You may receive SMS notification from us and can opt out any time.
+                </p> */}
+                <button id="signin" type='submit' disabled={!Form.isValid}>SignIn</button>
+
             </Form>
         </Formik>
+        <div className='alreadyHaveAccount'>
+            Already have an account? <Link to='/'>Click Here</Link>
+        </div>
     </div>
 
 )
