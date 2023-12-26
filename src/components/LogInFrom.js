@@ -3,7 +3,7 @@ import {Formik,Field, Form,ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import TextError from './TextError';
 import {Link} from 'react-router-dom';
-// import FormikControl from './FormikControl';
+
 
 const initialValues={
     email:'',
@@ -19,10 +19,11 @@ const onSubmit= values =>{
 }
 function LogInFrom() {
   return (
-    <div>
+    <div className='logIn_div'>
     <h1 id='title'> Facebook</h1>
     <Formik initialValues={initialValues} validationSchema={validationSchema}
     onSubmit= {onSubmit}>
+         
         <Form> 
         <p id='garib'> Log in to Garib ko facebooks</p>
                 <label htmlFor='email'>Email</label>

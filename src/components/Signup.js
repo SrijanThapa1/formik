@@ -3,6 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import TextError from './TextError';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 const initialValues= {
     firstName:'',
     lastName:'',
@@ -11,15 +12,30 @@ const initialValues= {
     gender:''
 }
 const validationSchema= Yup.object({
-    firstname:Yup.string().required("Required"),
-    lastname:Yup.string().required("Required"),
+    firstName:Yup.string().required("Required"),
+    lastName:Yup.string().required("Required"),
     email:Yup.string().email("invalid email froamt").required('Required'),
     password:Yup.string().required("required").min(8,"Must be at least 8 characters"),
     birthday:Yup.date().required("required"),
     gender:Yup.string().required("required")
 
 })
-const onSubmit = values=>{
+const onSubmit = (values, {resetForm})=>{
+
+    axios.post('https://658ae562ba789a9622381c2b.mockapi.io/srijan/formikFacebook',values)
+    .then(response =>{ console.log(response)
+    resetForm({
+        values:{
+            firstName:'',
+            lastName:'',
+            email:'',
+            password:'',
+            birthday:'',
+            gender:''
+        },
+    })
+})
+    .catch(err => console.log(err))
     console.log("form date", values)
 }
 function Signup() {
@@ -30,11 +46,11 @@ function Signup() {
 
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             <Form>
-                <Field type="text" import id="firstname" name="firstname" placeholder="firstname"/>
-                <ErrorMessage name='firstname' component={TextError}/>
+                <Field type="text" import id="firstName" name="firstName" placeholder="firstname"/>
+                <ErrorMessage name='firstName' component={TextError}/>
 
-                <Field type="text" import id="lastname" name="lastname" placeholder="lastname"/>
-                <ErrorMessage name='lastname' component={TextError}/>
+                <Field type="text" import id="lastName" name="lastName" placeholder="lastname"/>
+                <ErrorMessage name='lastName' component={TextError}/>
 
                 <Field type='email' id='email' name='email' placeholder="Email"/>
                 <ErrorMessage name='email'>
@@ -61,11 +77,8 @@ function Signup() {
                 <option value="female">Female</option>
                 <option value="other">Other</option>
                 </Field>
-                {/* <p> people who use my service may have uploaded your contact infroamtion to garib ko facebook </p>
-                <p> By clicking Sign up, you agree to my Terms, Privacy Policy and Cookies Policy.
-                    You may receive SMS notification from us and can opt out any time.
-                </p> */}
-                <button id="signin" type='submit' disabled={!Form.isValid}>SignIn</button>
+               
+                <button  type='submit' id="signin" disabled={Formik.isValid}>SignIn</button>
 
             </Form>
         </Formik>

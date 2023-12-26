@@ -8,4 +8,4 @@ function TextError(props) {
   )
 }
 
-export default TextError
+export default TextError;
