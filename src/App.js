@@ -3,7 +3,7 @@ import LoginFrom from './components/LogInFrom';
 import ForgotPassword from './components/ForgotPassword';
 import Signup from './components/Signup';
 import {Routes,Route } from 'react-router-dom';
-
+import modal from 'react-modal'
 function App() {
  
   return (
