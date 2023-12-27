@@ -4,7 +4,8 @@ import * as Yup from 'yup';
 import TextError from './TextError';
 import {Link} from 'react-router-dom';
 import SubmitForm from './SubmitForm';
-
+import Signup from './Signup';
+import Modal from 'react-modal';
 
 const initialValues={
     email:'',
@@ -19,6 +20,15 @@ const validationSchema= Yup.object({
 
 
 function LogInFrom() {
+    const [showSignupModel, setShowSignupModel]= useState(false);
+
+    const openSignupModel =() =>{
+        setShowSignupModel(true);
+    }
+    const closeSignUpModel = () =>{
+        setShowSignupModel(false);
+    }
+
     const onSubmit= values =>{
         console.log("From data", values)
         setIsSubmitSucess(true);
@@ -51,7 +61,7 @@ function LogInFrom() {
                         <label htmlFor='password'>
                             Password
                         </label>
-                        <Field type='text' id='password' name='password' placeholder="Password"/>
+                        <Field type='password' id='password' name='password' placeholder="Password"/>
                         <ErrorMessage name='password' component={TextError}/>
                    
                     <button type='submit' disabled={Form.isValid}>Log In</button>
@@ -61,8 +71,30 @@ function LogInFrom() {
     Forgot account? <Link to ='/forgotPassword'> Click Here</Link>
     </div>
     <div className='signup'>
-    <Link to="/signup"> Create new account</Link>
+        <button id='signup-btn'onClick={openSignupModel}> Create new account</button>
+    {/* <Link to="/signup"> Create new account</Link> */}
     </div>
+    {/* Modal for Signup */}
+    {/* {showSignupModel && (
+        <div className='modal'>
+            <div className='modal-content'>
+                <span className='close' onClick={closeSignUpModel}>
+                    &times;
+                </span>
+                <Signup/>
+            </div>
+        </div>
+    )
+    } */}
+    {/* Using actual Model imported from react-modal */}
+    <Modal isOpen={showSignupModel} onRequestClose={closeSignUpModel}
+    className= "modal-content"
+    overlayClassName= "modal-overlay">
+        <span className='close' onClick={closeSignUpModel}>
+            &times;
+        </span>
+        <Signup/>
+    </Modal>
 </div>
 }
 
