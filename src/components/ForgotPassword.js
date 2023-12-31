@@ -27,6 +27,7 @@ function ForgotPassword() {
                 <Form className='password1'>
                     <div className='password'>
                     <h1> Facebook</h1>
+                    <div className='right-password'>
                     <Field type="email" id="email" name="email" placeholder="Email"/>
                     <ErrorMessage name='email' component={TextError}/>
 
@@ -35,6 +36,7 @@ function ForgotPassword() {
 
                     <button type='submit' id='forgot_login'>Log In</button>
                     <span> <Link to='/forgotPassword'> Forgot account?</Link></span>
+                    </div>
                     </div>
                 </Form>
                 <Form id='findYourAccount'>
